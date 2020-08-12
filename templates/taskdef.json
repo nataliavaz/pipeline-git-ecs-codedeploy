@@ -1,0 +1,37 @@
+{
+  "executionRoleArn": "<role_arn>",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/<log_group>",
+          "awslogs-region": "<region>",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "image": "<IMAGE1_NAME>",
+      "name": "<task_name>"
+    }
+  ],
+  "placementConstraints": [],
+  "memory": "<memory>",
+  "cpu": "<cpu>",
+  "taskRoleArn": "<role_arn>",
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "family": "<task_name>",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc"
+}

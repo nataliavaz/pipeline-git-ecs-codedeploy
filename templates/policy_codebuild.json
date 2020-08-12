@@ -1,0 +1,41 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecr:*",
+                "cloudtrail:LookupEvents"
+            ],
+            "Resource": "${ecr_repos}"
+        },
+        {
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:logs:*:*:log-group:/codebuild/${log_group}",
+                "arn:aws:logs:*:*:log-group:/codebuild/${log_group}:*"
+            ],
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ]
+        },
+        {
+            "Sid": "UploadImage",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:CompleteLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:InitiateLayerUpload"
+            ],
+            "Resource": "${ecr_repos}/*"
+        },
+        {
+            "Sid": "Login",
+            "Effect": "Allow",
+            "Action": "ecr:GetAuthorizationToken",
+            "Resource": "*"
+        }
+    ]
+}

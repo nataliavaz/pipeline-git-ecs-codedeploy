@@ -1,0 +1,21 @@
+version: 0.2
+phases: 
+  install: 
+    runtime-versions:
+      nodejs: ${node_version}
+    commands: 
+      - echo Installing source NPM dependencies...
+      - npm install
+  pre_build: 
+    commands: 
+      - echo Exec tests...
+      - npm run test
+  build: 
+    commands: 
+      - echo Build started on `date`
+      - echo Compiling the dist folder
+      - npm run build
+      - npm run deploy prod
+  post_build: 
+    commands: 
+    - echo Build completed on `date`

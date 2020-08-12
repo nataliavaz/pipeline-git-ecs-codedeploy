@@ -1,0 +1,27 @@
+{
+    "Version": "2012-10-17",
+    "Id": "SSEAndSSLPolicy",
+    "Statement": [
+        {
+            "Sid": "DenyInsecureConnections",
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::${bucket_name}/*",
+            "Condition": {
+                "Bool": {
+                    "aws:SecureTransport": "false"
+                }
+            }
+        },
+        {
+            "Sid": "Cloudfront -Origin Access Identity",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "${access_identity}"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::${bucket_name}/*"
+        }
+    ]
+}
