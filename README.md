@@ -1,6 +1,6 @@
 # pipeline-git-ecs-codedeploy
 
-Este repositório contém um projeto escrito em Terraform para criação de uma solução completa de hospedagem de uma aplicação de frontend, serviços/tasks no ECS e pipeline de entrega contínua utilizando o GIT, Codebuild e Codedeploy.
+Este repositório contém um projeto escrito em Terraform para criação de uma solução completa de hospedagem de uma aplicação de frontend, serviços/tasks no ECS e pipeline de entrega contínua utilizando o GITHub como source, Codebuild e Codedeploy.
 
 Com a solução, ao ser executado um push na branch 'master' do repositório origem do GitHub, o webhook envia ao Codebuild um aviso de que houve alteração. O Codebuild, por sua vez, inicia o processo de geração da imagem e upload no repositório do ECR. O repositório é monitorado pelo Cloudwatch, que quando identifica atualização da imagem, inicia o Pipeline de deploy. 
 O Codedeploy executa o deploy utilizando o tipo Blue/Green deployment, que consiste em iniciar novas tasks com a imagem nova e rotear o tráfego do LoadBalancer para elas, quando o processo é concluído, as tasks antigas são finalizadas.
@@ -67,7 +67,7 @@ Estrutura de Arquivos:
     * Após criar os repositórios, adicionar os arquivos 'taskdef.json' e 'appspec.yml' alterando as configurações de acordo com o ambiente criado (modelos no caminho: modules/templates)
 
 
-5. Criar o restante dos recursos
+5. Criar o restante dos recursos (environment)
   * Alterar as variáveis nos arquivos 'variables.auto.tfvars' e 'main.tf' de acordo com a necessidade;
   * Executar os comandos:
     ```bash
@@ -94,6 +94,4 @@ Ao atualizar o projeto, o terraform retornará o erro (para cada serviço utiliz
 
 ```
 
-Isso ocorre porque a API da AWS não permite atualizar serviços do ECS que utilizem o CodeDeploy como deployment controller
-
-[AWS-ECS](https://docs.aws.amazon.com/cli/latest/reference/ecs/update-service.html)
+Isso ocorre porque a API da AWS não permite atualizar serviços do ECS que utilizem o CodeDeploy como deployment controller -> [AWS-ECS](https://docs.aws.amazon.com/cli/latest/reference/ecs/update-service.html)
