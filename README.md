@@ -80,7 +80,6 @@ Dependências:
 * [AWSCLI](https://aws.amazon.com/pt/cli/)
 * [Terraform](https://www.terraform.io/downloads.html)
 * [GIT](https://git-scm.com/downloads)
-* [GIT-Crypt](https://github.com/AGWA/git-crypt/blob/master/INSTALL.md)
 
 
 **Problemas conhecidos**
