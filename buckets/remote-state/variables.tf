@@ -1,5 +1,4 @@
 variable "environment" {
-  default = "A1"
 }
 
 variable "region" {
